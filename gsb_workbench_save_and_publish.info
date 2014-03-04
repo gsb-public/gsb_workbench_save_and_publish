@@ -1,0 +1,5 @@
+name = GSB Workbench Save and Publish
+description = Adds a save and publish button to node pages.
+core = 7.x
+Package = GSB
+

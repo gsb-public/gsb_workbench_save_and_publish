@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * @todo.
+ */
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form().
+ */
+function gsb_workbench_save_and_publish_form_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['save_and_publish'] = array(
+    '#type' =>  'submit',
+    '#value' => t('Save And Publish'),
+    '#weight' => 6,
+    '#submit' => array(
+      'workbench_save_and_publish_submit',
+      'node_form_submit',
+    ),
+  );
+
+  $form['actions']['submit']['#value'] = t('Save As Draft');
+}
+
+/**
+ * Form submission handler for the node form.
+ */
+function gsb_workbench_save_and_publish_submit($form, &$form_state) {
+  $form_state['values']['workbench_moderation_state_new'] = 'published';
+}
