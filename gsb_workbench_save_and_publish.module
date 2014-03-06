@@ -11,7 +11,7 @@
 function gsb_workbench_save_and_publish_form_node_form_alter(&$form, &$form_state, $form_id) {
   $form['actions']['save_and_publish'] = array(
     '#type' =>  'submit',
-    '#value' => t('Save And Publish'),
+    '#value' => t('Publish'),
     '#weight' => 6,
     '#submit' => array(
       'gsb_workbench_save_and_publish_submit',
