@@ -6,6 +6,20 @@
  */
 
 /**
+ * Implements hook_module_implements_alter().
+ */
+function gsb_workbench_save_and_publish_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter') {
+    // Allow gsb_workbench_save_and_publish_form_node_form_alter to run last.
+    if (isset($implementations['gsb_workbench_save_and_publish'])) {
+      $group = $implementations['gsb_workbench_save_and_publish'];
+      unset($implementations['gsb_workbench_save_and_publish']);
+      $implementations['gsb_workbench_save_and_publish'] = $group;
+    }
+  }
+}
+
+/**
  * Implements hook_form_BASE_FORM_ID_alter() for node_form().
  */
 function gsb_workbench_save_and_publish_form_node_form_alter(&$form, &$form_state, $form_id) {
@@ -13,10 +27,7 @@ function gsb_workbench_save_and_publish_form_node_form_alter(&$form, &$form_stat
     '#type' =>  'submit',
     '#value' => t('Publish'),
     '#weight' => 6,
-    '#submit' => array(
-      'gsb_workbench_save_and_publish_submit',
-      'node_form_submit',
-    ),
+    '#submit' => $form['actions']['submit']['#submit'],
   );
 
   $form['actions']['submit']['#value'] = t('Save As Draft');
