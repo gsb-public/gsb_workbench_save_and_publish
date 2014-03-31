@@ -30,6 +30,10 @@ function gsb_workbench_save_and_publish_form_node_form_alter(&$form, &$form_stat
     '#submit' => $form['actions']['submit']['#submit'],
   );
 
+  // Add our own submit method to the top.
+  array_unshift($form['actions']['save_and_publish']['#submit'], 'gsb_workbench_save_and_publish_submit');
+
+  // Change Save button to say Save As Draft.
   $form['actions']['submit']['#value'] = t('Save As Draft');
 }
 
