@@ -16,6 +16,13 @@ function gsb_workbench_save_and_publish_module_implements_alter(&$implementation
       unset($implementations['gsb_workbench_save_and_publish']);
       $implementations['gsb_workbench_save_and_publish'] = $group;
     }
+
+    // We really need submit field to be last so it picks up our changes above.
+    if (isset($implementations['submit_field'])) {
+      $group = $implementations['submit_field'];
+      unset($implementations['submit_field']);
+      $implementations['submit_field'] = $group;
+    }
   }
 }
 
